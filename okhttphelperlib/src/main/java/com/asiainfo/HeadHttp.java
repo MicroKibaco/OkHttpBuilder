@@ -8,7 +8,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * 作者:小木箱 邮箱:yangzy3@asiainfo.com 创建时间:2017年03月31日21点13分 描述:
+ * 作者:小木箱 邮箱:yangzy3@asiainfo.com 创建时间:2017年03月31日21点13分 描述:http 请求头和响应头实际应用
  */
 public class HeadHttp {
 

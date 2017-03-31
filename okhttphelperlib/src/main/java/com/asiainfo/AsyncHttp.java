@@ -9,7 +9,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * 作者:小木箱 邮箱:yangzy3@asiainfo.com 创建时间:2017年03月31日19点58分 描述:
+ * 作者:小木箱 邮箱:yangzy3@asiainfo.com 创建时间:2017年03月31日19点58分 描述:okhttp 同步请求和异步请求
  */
 public class AsyncHttp {
 
