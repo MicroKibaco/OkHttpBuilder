@@ -1,4 +1,4 @@
-package com.asiainfo;
+package com.asiainfo.test;
 
 import java.io.IOException;
 

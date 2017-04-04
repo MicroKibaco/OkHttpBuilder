@@ -1,4 +1,4 @@
-package com.asiainfo;
+package com.asiainfo.test;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ public class AsyncHttp {
 
     public static void main(String[] args) {
 
-       //  sendRequest("http://www.yangzhengyou.com");
+        //  sendRequest("http://www.yangzhengyou.com");
         sendAsyncRequest("https://github.com/MicroKibaco");
 
     }
@@ -51,14 +51,14 @@ public class AsyncHttp {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                System.out.println("Asynchronous requests failed: " + e);
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
 
                 if (response.isSuccessful()) {
-
+                    System.out.println("An asynchronous request is successful: " + response.body().string());
                 }
 
             }

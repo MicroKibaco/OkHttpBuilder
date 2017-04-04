@@ -5,7 +5,7 @@ import android.util.Log;
 import java.util.Locale;
 
 /**
- * Logger日志
+ * Logger
  */
 
 public class Logger {

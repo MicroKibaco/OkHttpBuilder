@@ -16,7 +16,7 @@ import java.io.File;
 
 public class MainActivity extends Activity {
 
-    private static final String IMAGE_URL = "https://img1.gtimg.com/ninja/2/2017/04/ninja149127598426898.jpg";
+    private static final String IMAGE_URL = "http://www.yangzhengyou.com/images/logo.png";
     private ImageView image;
 
     @Override
@@ -29,6 +29,7 @@ public class MainActivity extends Activity {
         Logger.error("MicroKibaco", "file path: " + file.getAbsolutePath());
 
         HttpManager.getInstance().asyncRequest(IMAGE_URL, new DownloadCallBack() {
+
             @Override
             public void sucess(File file) {
 

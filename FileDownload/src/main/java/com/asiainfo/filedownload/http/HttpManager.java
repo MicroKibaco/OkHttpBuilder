@@ -68,7 +68,7 @@ public class HttpManager {
             @Override
             public void onFailure(Call call, IOException e) {
 
-                Logger.error("MicroKibaco", "网络请求失败,请检查网络: " + e);
+                Logger.error("MicroKibaco", "Network request failed, please check your network: " + e);
 
             }
 
@@ -77,7 +77,7 @@ public class HttpManager {
 
                 if (!response.isSuccessful() && callBack != null) {
 
-                    callBack.fail(NETWORK_CODE, "网络请求失败");
+                    callBack.fail(NETWORK_CODE, "Network Request Failed!");
 
                 }
 
