@@ -8,7 +8,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * Created by MicroKibaco on 4/4/17.
+ * http 字段content-length、range、Transfer-Encoding chunked实践
  */
 
 public class RangeHttp {
