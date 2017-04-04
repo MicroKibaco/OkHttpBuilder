@@ -3,7 +3,7 @@ package com.asiainfo.filedownload.http;
 import java.io.File;
 
 /**
- * Created by MicroKibaco on 4/4/17.
+ * 多线程下载回调
  */
 
 public interface DownloadCallBack {

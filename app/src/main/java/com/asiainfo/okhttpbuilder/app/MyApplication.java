@@ -2,8 +2,8 @@ package com.asiainfo.okhttpbuilder.app;
 
 import android.app.Application;
 
-import com.asiainfo.filedownload.file.FileStorageManager;
-import com.asiainfo.filedownload.http.HttpManager;
+import com.asiainfo.filedownload.manager.FileStorageManager;
+import com.asiainfo.filedownload.manager.HttpManager;
 
 /**
  * Created by MicroKibaco on 4/4/17.

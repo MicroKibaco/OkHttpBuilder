@@ -1,4 +1,4 @@
-package com.asiainfo.filedownload.file;
+package com.asiainfo.filedownload.manager;
 
 import android.content.Context;
 import android.os.Environment;

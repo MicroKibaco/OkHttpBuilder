@@ -1,14 +1,13 @@
-package com.asiainfo.filedownload.http;
+package com.asiainfo.filedownload.manager;
 
 import android.content.Context;
 
-import com.asiainfo.filedownload.file.FileStorageManager;
+import com.asiainfo.filedownload.http.DownloadCallBack;
+import com.asiainfo.filedownload.utils.FileUtils;
 import com.asiainfo.filedownload.utils.Logger;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -17,13 +16,14 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * Created by MicroKibaco on 4/4/17.
+ * HttpManager
  */
 
 public class HttpManager {
 
+    public static final int NETWORK_CODE = 1;
+    public static final int NETWORK_ERROR_CODE = 2;
     private static final HttpManager ourInstance = new HttpManager();
-    private static final int NETWORK_CODE = 1;
     private Context mContext;
     private OkHttpClient mClient;
 
@@ -40,12 +40,13 @@ public class HttpManager {
     }
 
     /**
-     * 同步请求
+     * Synchronous Invocation
      */
-    public Response syncRequest(String url) {
+    public Response syncRequestByRange(String url, long start, long end) {
 
-
-        Request request = new Request.Builder().url(url).build();
+        Request request = new Request.Builder().url(url).
+                addHeader("Range", "bytes=" + start + "-" + end).
+                build();
         try {
             return mClient.newCall(request).execute();
         } catch (IOException e) {
@@ -57,7 +58,18 @@ public class HttpManager {
     }
 
     /**
-     * 异步请求
+     * Asynchronous Invocation
+     */
+    public void asyncRequest(String url, final Callback callback) {
+
+        Request request = new Request.Builder().url(url).build();
+
+        mClient.newCall(request).enqueue(callback);
+
+    }
+
+    /**
+     * Asynchronous Invocation
      */
 
     public void asyncRequest(final String url, final DownloadCallBack callBack) {
@@ -85,17 +97,7 @@ public class HttpManager {
 
                 Logger.error("MicroKibaco", "file: " + file.getAbsolutePath());
 
-                int len = 0;
-                byte[] bytes = new byte[1024 * 500];
-                FileOutputStream fileOut = new FileOutputStream(file);
-
-                InputStream inStream = response.body().byteStream();
-                while ((len = inStream.read(bytes, 0, bytes.length)) != -1) {
-
-                    fileOut.write(bytes, 0, len);
-                    fileOut.flush();
-
-                }
+                FileUtils.readFileBytes(response, file);
 
                 callBack.sucess(file);
             }
