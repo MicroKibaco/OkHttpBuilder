@@ -1,5 +1,7 @@
 package com.asiainfo.filedownload.thread;
 
+import com.asiainfo.filedownload.db.DownloadEntity;
+import com.asiainfo.filedownload.db.DownloadHelper;
 import com.asiainfo.filedownload.http.DownloadCallBack;
 import com.asiainfo.filedownload.manager.FileStorageManager;
 import com.asiainfo.filedownload.manager.HttpManager;
@@ -21,12 +23,14 @@ public class DownloadRunnable implements Runnable {
     private long mStart;
     private long mEnd;
     private DownloadCallBack mCallBack;
+    private DownloadEntity mEntity;
 
-    public DownloadRunnable(String url, long start, long end, DownloadCallBack callback) {
+    public DownloadRunnable(String url, long start, long end, DownloadCallBack callback, DownloadEntity entity) {
         mUrl = url;
         mStart = start;
         mEnd = end;
         mCallBack = callback;
+        mEntity = entity;
     }
 
     @Override
@@ -43,6 +47,8 @@ public class DownloadRunnable implements Runnable {
 
         File file = FileStorageManager.getInstance().getFileByName(mUrl);
 
+        long progress = 0;
+
         try {
             RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rwd");
 
@@ -56,10 +62,16 @@ public class DownloadRunnable implements Runnable {
             while ((len = inStream.read(bytes, 0, bytes.length)) != -1) {
 
                 randomAccessFile.write(bytes, 0, len);
+                progress += len;
+                mEntity.setProgress_position(progress);
 
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+
+            DownloadHelper.getInstance().insert(mEntity);
+
         }
 
         mCallBack.sucess(file);

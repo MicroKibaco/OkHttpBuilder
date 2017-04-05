@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * {@inheritDoc}
- *
+ * 
  * @see AbstractDaoSession
  */
 public class DaoSession extends AbstractDaoSession {

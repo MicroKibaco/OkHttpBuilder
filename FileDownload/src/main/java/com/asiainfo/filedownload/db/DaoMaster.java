@@ -29,13 +29,11 @@ public class DaoMaster extends AbstractDaoMaster {
         DownloadEntityDao.createTable(db, ifNotExists);
     }
 
-    /**
-     * Drops underlying database table using DAOs.
-     */
+    /** Drops underlying database table using DAOs. */
     public static void dropAllTables(SQLiteDatabase db, boolean ifExists) {
         DownloadEntityDao.dropTable(db, ifExists);
     }
-
+    
     public DaoSession newSession() {
         return new DaoSession(db, IdentityScopeType.Session, daoConfigMap);
     }
@@ -43,7 +41,7 @@ public class DaoMaster extends AbstractDaoMaster {
     public DaoSession newSession(IdentityScopeType type) {
         return new DaoSession(db, type, daoConfigMap);
     }
-
+    
     public static abstract class OpenHelper extends SQLiteOpenHelper {
 
         public OpenHelper(Context context, String name, CursorFactory factory) {
@@ -57,9 +55,7 @@ public class DaoMaster extends AbstractDaoMaster {
         }
     }
 
-    /**
-     * WARNING: Drops all table on Upgrade! Use only during development.
-     */
+    /** WARNING: Drops all table on Upgrade! Use only during development. */
     public static class DevOpenHelper extends OpenHelper {
         public DevOpenHelper(Context context, String name, CursorFactory factory) {
             super(context, name, factory);
@@ -72,5 +68,5 @@ public class DaoMaster extends AbstractDaoMaster {
             onCreate(db);
         }
     }
-
+    
 }

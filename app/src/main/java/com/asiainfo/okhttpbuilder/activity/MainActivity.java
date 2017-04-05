@@ -19,6 +19,7 @@ public class MainActivity extends Activity {
 
     private static final String IMAGE_URL = "http://www.yangzhengyou.com/images/logo.png";
     private ImageView image;
+    private int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,12 @@ public class MainActivity extends Activity {
             @Override
             public void sucess(File file) {
 
+                if (count < 1) {
+
+                    count++;
+                    return;
+
+                }
                 final Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
 
                 runOnUiThread(new Runnable() {
