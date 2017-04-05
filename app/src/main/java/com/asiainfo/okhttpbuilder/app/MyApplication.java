@@ -2,6 +2,7 @@ package com.asiainfo.okhttpbuilder.app;
 
 import android.app.Application;
 
+import com.asiainfo.filedownload.db.DownloadHelper;
 import com.asiainfo.filedownload.manager.FileStorageManager;
 import com.asiainfo.filedownload.manager.HttpManager;
 
@@ -16,6 +17,7 @@ public class MyApplication extends Application {
         super.onCreate();
         FileStorageManager.getInstance().init(this);
         HttpManager.getInstance().init(this);
+        DownloadHelper.getInstance().init(this);
     }
 
 
