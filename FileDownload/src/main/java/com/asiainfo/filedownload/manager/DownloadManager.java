@@ -109,7 +109,11 @@ public class DownloadManager {
         for (int i = 0; i < MAX_THREAD; i++) {
 
             long startSize = i * threadDownloadSize;
-            long endSize = (i + 1) * threadDownloadSize - 1;
+
+            long endSize = 0;
+
+            endSize = endSize == MAX_THREAD - 1 ? length - 1 : (i + 1) * threadDownloadSize - 1;
+
             mExecutor.execute(new DownloadRunnable(url, startSize, endSize, callback));
 
         }

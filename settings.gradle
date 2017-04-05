@@ -1,1 +1,1 @@
-include ':app', ':okhttphelperlib', ':FileDownload'
+include ':app', ':okhttphelperlib', ':FileDownload', ':dbgenerate'
