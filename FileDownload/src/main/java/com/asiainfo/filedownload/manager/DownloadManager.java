@@ -4,8 +4,10 @@ import android.support.annotation.NonNull;
 
 import com.asiainfo.filedownload.http.DownloadCallBack;
 import com.asiainfo.filedownload.thread.DownloadRunnable;
+import com.asiainfo.filedownload.thread.DownloadTask;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -25,7 +27,6 @@ public class DownloadManager {
     private static final DownloadManager ourInstance = new DownloadManager();
 
     private static final int MAX_THREAD = 2;
-
     private static final ThreadPoolExecutor mExecutor = new ThreadPoolExecutor
             (MAX_THREAD, MAX_THREAD, 60, TimeUnit.DAYS, new LinkedBlockingDeque<Runnable>(), new ThreadFactory() {
 
@@ -40,6 +41,7 @@ public class DownloadManager {
                     return thread;
                 }
             });
+    private HashSet<DownloadTask> mDownloadTasks = new HashSet<>();
 
     private DownloadManager() {
 
@@ -49,7 +51,17 @@ public class DownloadManager {
         return ourInstance;
     }
 
+
     public void download(final String url, final DownloadCallBack callBack) {
+
+        final DownloadTask task = new DownloadTask(url, callBack);
+        if (mDownloadTasks.contains(task)) {
+            callBack.fail(HttpManager.TASK_RUNNING_ERROR_CODE, "Machine Translation");
+            return;
+
+        }
+
+        mDownloadTasks.add(task);
 
         HttpManager.getInstance().asyncRequest(url, new Callback() {
             @Override
@@ -74,12 +86,19 @@ public class DownloadManager {
                 }
 
                 processDownload(url, length, callBack);
+                finish(task);
 
             }
 
 
         });
 
+
+    }
+
+    public void finish(DownloadTask task) {
+
+        mDownloadTasks.remove(task);
 
     }
 

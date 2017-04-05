@@ -14,13 +14,17 @@ public class ThreadPoolTest {
 
         // test_threadPool01();
 
+        test_threadPool02();
+
+    }
+
+    private static void test_threadPool02() throws InterruptedException {
         MyRunnable myRunnable = new MyRunnable();
 
         Thread thread = new Thread(myRunnable);
         thread.start();
         Thread.sleep(1000);
-        myRunnable.flag = false;
-
+        Thread.interrupted();
     }
 
     private static void test_threadPool01() {
@@ -41,6 +45,7 @@ public class ThreadPoolTest {
                         Thread.sleep(2000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
+
                     }
 
                     System.out.println("index= " + index + ", queue size= " + queue.size());
@@ -51,17 +56,17 @@ public class ThreadPoolTest {
     }
 
     public static class MyRunnable implements Runnable {
-        public boolean flag = true;
 
         @Override
         public void run() {
 
-            while (flag) {
+            while (!Thread.interrupted()) {
 
                 try {
-                    Thread.sleep(200);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                    return;
                 }
 
                 System.out.println("main Thread is running...");

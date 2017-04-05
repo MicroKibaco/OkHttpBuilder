@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
 
         // HttpManagerTest(image);
 
-        // DownloadManagerTest(image);
+        DownloadManagerTest(image);
 
     }
 

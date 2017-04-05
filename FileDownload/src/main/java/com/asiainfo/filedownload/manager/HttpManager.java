@@ -23,6 +23,7 @@ public class HttpManager {
 
     public static final int NETWORK_CODE = 1;
     public static final int NETWORK_ERROR_CODE = 2;
+    public static final int TASK_RUNNING_ERROR_CODE = 3;
     private static final HttpManager ourInstance = new HttpManager();
     private Context mContext;
     private OkHttpClient mClient;
