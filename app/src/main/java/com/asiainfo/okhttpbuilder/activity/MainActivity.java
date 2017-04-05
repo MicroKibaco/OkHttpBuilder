@@ -30,6 +30,11 @@ public class MainActivity extends Activity {
 
         // HttpManagerTest(image);
 
+        // DownloadManagerTest(image);
+
+    }
+
+    private void DownloadManagerTest(final ImageView image) {
         DownloadManager.getInstance().download(IMAGE_URL, new DownloadCallBack() {
             @Override
             public void sucess(File file) {
@@ -58,7 +63,6 @@ public class MainActivity extends Activity {
 
             }
         });
-
     }
 
     private void HttpManagerTest(final ImageView image) {

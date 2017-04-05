@@ -6,7 +6,7 @@ import com.asiainfo.filedownload.http.DownloadCallBack;
 import com.asiainfo.filedownload.thread.DownloadRunnable;
 
 import java.io.IOException;
-import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -27,7 +27,7 @@ public class DownloadManager {
     private static final int MAX_THREAD = 2;
 
     private static final ThreadPoolExecutor mExecutor = new ThreadPoolExecutor
-            (MAX_THREAD, MAX_THREAD, 60, TimeUnit.DAYS, new SynchronousQueue<Runnable>(), new ThreadFactory() {
+            (MAX_THREAD, MAX_THREAD, 60, TimeUnit.DAYS, new LinkedBlockingDeque<Runnable>(), new ThreadFactory() {
 
 
                 private AtomicInteger mAtomicInteger = new AtomicInteger(1);
