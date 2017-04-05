@@ -10,27 +10,6 @@ import java.util.concurrent.TimeUnit;
 
 public class ThreadPoolTest {
 
-    public static class MyRunnable implements Runnable {
-        public boolean flag = true;
-
-        @Override
-        public void run() {
-
-            while (flag) {
-
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                System.out.println("main Thread is running...");
-
-            }
-
-        }
-    }
-
     public static void main(String[] args) throws InterruptedException {
 
         // test_threadPool01();
@@ -42,69 +21,6 @@ public class ThreadPoolTest {
         Thread.sleep(1000);
         myRunnable.flag = false;
 
-    }
-
-    public static class MyRunnable implements Runnable {
-        public boolean flag = true;
-
-        @Override
-        public void run() {
-
-            while (flag) {
-
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                System.out.println("main Thread is running...");
-
-            }
-
-        }
-    }
-
-    public static class MyRunnable implements Runnable {
-        public boolean flag = true;
-
-        @Override
-        public void run() {
-
-            while (flag) {
-
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                System.out.println("main Thread is running...");
-
-            }
-
-        }
-    }
-
-    public static class MyRunnable implements Runnable {
-        public boolean flag = true;
-
-        @Override
-        public void run() {
-
-            while (flag) {
-
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                System.out.println("main Thread is running...");
-
-            }
-
-        }
     }
 
     private static void test_threadPool01() {
@@ -130,6 +46,27 @@ public class ThreadPoolTest {
                     System.out.println("index= " + index + ", queue size= " + queue.size());
                 }
             });
+
+        }
+    }
+
+    public static class MyRunnable implements Runnable {
+        public boolean flag = true;
+
+        @Override
+        public void run() {
+
+            while (flag) {
+
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                System.out.println("main Thread is running...");
+
+            }
 
         }
     }
